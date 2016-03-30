@@ -1,0 +1,30 @@
+Disclaimer: I did the homework on CUSP cluster.
+
+
+Before creating the mapper and reducer, I put the data on the hadoop
+file system with the following commands (suppose we are in a directory
+called homework5 on cluster):
+
+hadoop fs -get /data/share/bdm/citibike.csv
+hadoop fs -put citibike.csv
+
+The first step is to create a mapper and reducer. The corresponding
+codes are attached separately. Then I run the first mapper and reducer
+in the cluster with the following command:
+
+./run.sh mapper.py reducer.py citibike.csv output 2 2 result.txt
+
+The second step is to create a mapper2 and reducer2. The corresponding
+codes are again attached separately. I run the second mapper and reducer
+in the cluster with the following command:
+
+./run.sh mapper2.py reducer2.py output/part* output2 2 1 median.txt
+# make sure to only use one reducer by giving 1
+
+And finally we can see the result in median.txt:
+
+cat median.txt
+'The median is 9 minutes.'
+
+The final result might be a bit different from the standard one because
+I round up 30 seconds or more to 1 minute instead of igorning the remaining seconds.
